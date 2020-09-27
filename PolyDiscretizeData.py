@@ -54,17 +54,17 @@ class PolyDiscretizeData():
         enc = OneHotEncoder()
 
         indecies, bins = pd.cut(vector, k, labels = False, retbins = True)
-        print "indecies: "
-        print indecies
-        print bins
+        print("indecies: ")
+        print (indecies)
+        print (bins)
         indecies = indecies.reshape(-1,1)
         ew = enc.fit(indecies)
 
         equal_width_matrix = ew.transform(indecies).toarray()
         columns = equal_width_matrix.shape[1]
         column_type = np.ones([columns])
-        print "column_types: "
-        print column_type
+        print ("column_types: ")
+        print (column_type)
 
         return equal_width_matrix, column_type, bins
 
@@ -144,13 +144,13 @@ class PolyDiscretizeData():
         #binary_dataset = binary_dataset[:, 1:]
         #feature_types = feature_types[1:]
         #or
-        print binary_dataset.shape
-        print feature_types.shape
+        print (binary_dataset.shape)
+        print (feature_types.shape)
         binary_dataset = np.delete(binary_dataset, 0, 1)
         feature_types = np.delete(feature_types,0,0)
         old_indecies = np.delete(old_indecies,0,0)
         feature_index =np.delete(feature_index,0,0)
-        print feature_index
+        print (feature_index)
 
         return binary_dataset, feature_types, old_indecies, feature_index
 
@@ -173,13 +173,13 @@ class PolyDiscretizeData():
         #binary_dataset = binary_dataset[:, 1:]
         #feature_types = feature_types[1:]
         #or
-        print binary_dataset.shape
-        print feature_types.shape
+        print (binary_dataset.shape)
+        print (feature_types.shape)
         binary_dataset = np.delete(binary_dataset, 0, 1)
         feature_types = np.delete(feature_types,0,0)
         old_indecies = np.delete(old_indecies,0,0)
         feature_index =np.delete(feature_index,0,0)
-        print feature_index
+        print (feature_index)
 
         return binary_dataset, feature_types, old_indecies, feature_index
 
@@ -203,13 +203,13 @@ class PolyDiscretizeData():
         #binary_dataset = binary_dataset[:, 1:]
         #feature_types = feature_types[1:]
         #or
-        print binary_dataset.shape
-        print feature_types.shape
+        print( binary_dataset.shape)
+        print (feature_types.shape)
         binary_dataset = np.delete(binary_dataset, 0, 1)
         feature_types = np.delete(feature_types,0,0)
         old_indecies = np.delete(old_indecies,0,0)
         feature_index =np.delete(feature_index,0,0)
-        print feature_index
+        print (feature_index)
 
         return binary_dataset, feature_types, old_indecies, feature_index
 
@@ -220,39 +220,39 @@ class PolyDiscretizeData():
         rows ,cols = dataset.shape
 
 
-        print "rows: " + str(rows)
-        print "columns: " + str(cols)
+        print ("rows: " + str(rows))
+        print ("columns: " + str(cols))
 
 
         training_size = int(math.floor(rows * 0.75))
-        print "train_size: " + str(training_size)
+        print ("train_size: " + str(training_size))
 
         testing_size = int(training_size + math.floor(rows * 0.15))
-        print "test_size: " + str(testing_size)
+        print ("test_size: " + str(testing_size))
 
         validation_size = int(testing_size + math.ceil(rows*0.10))
-        print "val_size: " + str(validation_size)
+        print ("val_size: " + str(validation_size))
 
         training = dataset[0:training_size,:].astype(int)
         train_size = training.shape[0]
-        print "training: " + str(training.shape)
+        print ("training: " + str(training.shape))
         test = dataset[training_size:testing_size,:].astype(int)
         test_size = test.shape[0]
-        print "test: " + str(test.shape)
-        print "test row :"
-        print test[5,:]
+        print ("test: " + str(test.shape))
+        print ("test row :")
+        print (test[5,:])
         valid = dataset[testing_size:-1,:].astype(int)
         valid_size = valid.shape[0]
-        print "valid: " + str(valid.shape)
+        print ("valid: " + str(valid.shape))
 
         dims_indicies = np.array([rows, cols, train_size, test_size, valid_size ])
 
-        print "oldindex shape: " + str(oldindex.shape)
-        print "featindex shape: " + str(featindex.shape)
-        print "oldindex: "
-        print oldindex
-        print "featindex: "
-        print featindex
+        print ("oldindex shape: " + str(oldindex.shape))
+        print ("featindex shape: " + str(featindex.shape))
+        print ("oldindex: ")
+        print (oldindex)
+        print ("featindex: ")
+        print (featindex)
 
 
         np.savetxt(self.filedestination + self.name + '.dim.data', dims_indicies, fmt = '%1d', delimiter = ",")
@@ -287,7 +287,7 @@ if __name__ == "__main__":
     arguments = (sys.argv)[1:]
     #assert (len(sys.argv) - 1) == 4
 
-    print arguments
+    print (arguments)
     name = arguments[0]
     pathsrc = arguments[1]
     level = arguments[2]
@@ -297,8 +297,8 @@ if __name__ == "__main__":
     onehot = np.asarray(onehot)
     flag = False
     #case for when
-    print "onehot shape"
-    print onehot.shape
+    print ("onehot shape")
+    print (onehot.shape)
     if onehot.shape[0] <=1:
         flag = True
 
@@ -306,33 +306,33 @@ if __name__ == "__main__":
     #pathdest = "/home/andreas/Documents/MScAPR/SPN-wine/continuousdata/"
     dc = PolyDiscretizeData(name, pathsrc, level, pathdest, onehot)
     #dc = PolyDiscretizeData('testaussie',pathsrc, "equal_width_binning",pathdest, np.array([0,1,1,0,0,0,1,0,0,1,0,0,1,1,0]))
-    print dc.name
-    print dc.filesrc
-    print dc.level
-    print dc.filedestination
+    print (dc.name)
+    print (dc.filesrc)
+    print (dc.level)
+    print (dc.filedestination)
 
     if dc.level == 'mean_split_binary_binning':
         #create datafiles which should be in the correct file path
-        print "easy mean binning, 1 bins"
+        print ("easy mean binning, 1 bins")
         dataset, types, oldindex, featindex = dc.build_meansplit_dataset()
 
         dc.build_datafiles(dataset,types, oldindex, featindex)
 
 
     elif dc.level == "equal_width_binning":
-        print "equal width binning for polynomial learning"
+        print ("equal width binning for polynomial learning")
         bins = args.listb
         #bins = 2
         print("from bins =" + str(bins))
         if flag == True:
-            print "working on datasets/all continuous features"
+            print ("working on datasets/all continuous features")
             dataset, types, oldindex, featindex = dc.build_equalwidth_dataset_no_onehot(bins[0])
         else:
-            print "using one hot vector"
+            print ("using one hot vector")
             dataset, types, oldindex, featindex = dc.build_equalwidth_dataset(bins[0])
-        print dataset.shape
-        print types.shape
+        print (dataset.shape)
+        print (types.shape)
         dc.build_datafiles(dataset,types, oldindex, featindex)
 
     else:
-        print "nothing was done"
+        print ("nothing was done")

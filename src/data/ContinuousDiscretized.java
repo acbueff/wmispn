@@ -155,11 +155,11 @@ public class ContinuousDiscretized extends SparseDataset{
                     //int[] onehot = new int[]{1,0,0,1,1,0,0,1,0,1,0,0,0,0}; //cleave
                     //int[] onehot = new int[]{0,1,1,0,0,0,0,1,0,0,1,0,0,1,1,0}; //crx
                     //int[] onehot = new int[]{0,1,1,1,1,1,1,1,0}; //diabetes
-                    //int[] onehot = new int[]{0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}; //german
+                    int[] onehot = new int[]{0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0}; //german
                     //int[] onehot = new int[]{0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; //germanorg
                     //int[] onehot = new int[]{1,0,0,1,1,0,0,1,0,1,0,0,0,0}; //heart
                     //int[] onehot = new int[]{1,1,1,1,0}; //iris
-                    int[] onehot = new int[]{1,1,1,1,1,0}; //pcaburkina
+                    //int[] onehot = new int[]{1,1,1,1,1,0}; //pcaburkina
                     
                     
                     String onehotString = Arrays.toString(onehot)
@@ -169,10 +169,10 @@ public class ContinuousDiscretized extends SparseDataset{
                         .trim();
                     
                     
-                    String cmd = "/home/andreas/Documents/MScAPR/SPN-wine/continuousdata/PolyDiscretizeData.py ";
+                    String cmd = "/home/andreas/Desktop/wmispn/PolyDiscretizeData.py ";
 
                     
-                    String dest = "/home/andreas/Documents/MScAPR/SLSPN/data/ ";
+                    String dest = "home/andreas/Desktop/wmispn/out-data/ ";
                     //String level = "easy ";
                     String param = cmd + this.name +" " + dataset + " " + this.level+" "+ dest  + " --lista "  + onehotString + " --listb " + bins  ;
 
